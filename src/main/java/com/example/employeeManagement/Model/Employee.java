@@ -3,7 +3,9 @@ package com.example.employeeManagement.Model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employee", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"emailid"})
+})
 public class Employee {
 
     @Id
@@ -51,4 +53,5 @@ public class Employee {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
+
 }

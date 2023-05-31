@@ -10,5 +10,8 @@ public interface EmployeeService {
 
     List<Employee> getEmployees();
 
+    Employee loginEmployee(Employee employee);
     boolean deleteEmployee(Long empId);
+
+    boolean findByEmail(String email);
 }
