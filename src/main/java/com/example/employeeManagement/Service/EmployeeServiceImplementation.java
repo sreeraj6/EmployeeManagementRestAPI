@@ -59,4 +59,27 @@ public class EmployeeServiceImplementation implements EmployeeService{
          }
          return false;
     }
+
+    @Override
+    public Employee updateEmployee(Employee employee) {
+        try {
+            Employee existData = employeeRepository.getById(employee.getId());
+
+            if(employee.getEmailId() != null && existData.getEmailId() != employee.getEmailId()){
+                existData.setEmailId(employee.getEmailId());
+            }
+
+            if(employee.getFirstName() != null && existData.getFirstName() != employee.getFirstName()){
+                existData.setFirstName(employee.getFirstName());
+            }
+
+            if(employee.getLastName() != null && existData.getLastName() != employee.getLastName()) {
+                existData.setLastName(employee.getLastName());
+            }
+            return employeeRepository.save(existData);
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
 }
