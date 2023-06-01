@@ -14,4 +14,6 @@ public interface EmployeeService {
     boolean deleteEmployee(Long empId);
 
     boolean findByEmail(String email);
+
+    Employee updateEmployee(Employee employee);
 }

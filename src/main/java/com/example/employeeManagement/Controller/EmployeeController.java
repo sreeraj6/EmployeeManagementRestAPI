@@ -52,4 +52,16 @@ public class EmployeeController {
         }
         return new ResponseEntity<>("Invalid Username or Password", HttpStatus.BAD_REQUEST);
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateEmployee(@RequestBody Employee employee) {
+        try {
+            Employee updatedEmployee = employeeService.updateEmployee(employee);
+            updatedEmployee.getLastName();
+            return new ResponseEntity<>(updatedEmployee, HttpStatus.ACCEPTED);
+        }
+        catch (NullPointerException err) {
+            return new ResponseEntity<>("Error Occured : "+err.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }
