@@ -1,6 +1,8 @@
 package com.example.employeeManagement.Service;
 
+import com.example.employeeManagement.Model.Complaint;
 import com.example.employeeManagement.Model.User;
+import com.example.employeeManagement.Repository.ComplaintRepository;
 import com.example.employeeManagement.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ public class UserServiceImplementation implements UserService{
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ComplaintRepository complaintRepository;
 
     @Override
     public User addUser(User user) {
@@ -35,6 +39,33 @@ public class UserServiceImplementation implements UserService{
             return null;
         }
     }
+
+    @Override
+    public Complaint raiseComplaint(Long id, Complaint complaint) {
+        complaint.setStatus(1);
+        complaint.setUid(id);
+        return complaintRepository.save(complaint);
+    }
+
+    @Override
+    public List<Complaint> getComplaints(Long uid) {
+        List<Complaint> complaints = complaintRepository.getComplaintByUserId(uid);
+
+        for (Complaint currComplaint: complaints) {
+            switch (currComplaint.getStatus()) {
+                case 1 :
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default:
+
+            }
+        }
+        return complaints;
+    }
+
 
     @Override
     public User doLogin(User user) {

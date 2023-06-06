@@ -1,12 +1,14 @@
 package com.example.employeeManagement.Controller;
 
+import com.example.employeeManagement.Model.Complaint;
 import com.example.employeeManagement.Model.User;
 import com.example.employeeManagement.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/user")
@@ -37,5 +39,15 @@ public class UserController {
     public User getProfile(@PathVariable(value = "uid") Long id) {
         User user = userService.getDetails(id);
         return user;
+    }
+
+    @PostMapping("/raise-complaint/{uid}")
+    public Complaint putComplaint(@PathVariable(value = "uid") Long uid, @RequestBody Complaint complaint){
+        return userService.raiseComplaint(uid,complaint);
+    }
+
+    @GetMapping("/complaint-history/{uid}")
+    public List<Complaint> getComplaintHistory(@PathVariable(value = "uid") Long uid){
+        return userService.getComplaints(uid);
     }
 }
