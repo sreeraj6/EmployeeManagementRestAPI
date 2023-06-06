@@ -1,6 +1,8 @@
 package com.example.employeeManagement.Service;
 
+import com.example.employeeManagement.Model.Complaint;
 import com.example.employeeManagement.Model.Employee;
+import com.example.employeeManagement.Repository.ComplaintRepository;
 import com.example.employeeManagement.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ public class EmployeeServiceImplementation implements EmployeeService{
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private ComplaintRepository complaintRepository;
 
 
     @Override
@@ -81,5 +86,10 @@ public class EmployeeServiceImplementation implements EmployeeService{
         catch (Exception e){
             return null;
         }
+    }
+
+    @Override
+    public List<Complaint> getPendingComplaints() {
+        return complaintRepository.getNotAssignedComplaints();
     }
 }

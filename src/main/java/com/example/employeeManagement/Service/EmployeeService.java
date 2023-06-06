@@ -1,5 +1,6 @@
 package com.example.employeeManagement.Service;
 
+import com.example.employeeManagement.Model.Complaint;
 import com.example.employeeManagement.Model.Employee;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface EmployeeService {
     boolean findByEmail(String email);
 
     Employee updateEmployee(Employee employee);
+
+    List<Complaint> getPendingComplaints();
 }

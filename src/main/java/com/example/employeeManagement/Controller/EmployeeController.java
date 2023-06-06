@@ -1,5 +1,6 @@
 package com.example.employeeManagement.Controller;
 
+import com.example.employeeManagement.Model.Complaint;
 import com.example.employeeManagement.Model.Employee;
 import com.example.employeeManagement.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,11 @@ public class EmployeeController {
         catch (NullPointerException err) {
             return new ResponseEntity<>("Error Occured : "+err.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/pending-complaints")
+    public ResponseEntity<?> getPendingComplaintsForEmployee(){
+        List<Complaint> pendingComplaints = employeeService.getPendingComplaints();
+        return pendingComplaints.size() > 0 ? new ResponseEntity<>(pendingComplaints,HttpStatus.ACCEPTED) : new ResponseEntity<>("No pending work", HttpStatus.NO_CONTENT);
     }
 }
